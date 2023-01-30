@@ -1,5 +1,7 @@
 package flavio.flaviospringsecurityjwt.model;
 
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +9,10 @@ import java.util.List;
 @Entity
 @Table(name = "tb_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id_user")
     private Integer id;
 
     @Column(length = 50, nullable = false)
@@ -22,7 +25,7 @@ public class User {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "user_id") )
     @Column(name = "role_id")
     private List<String> roles = new ArrayList<>();
 
